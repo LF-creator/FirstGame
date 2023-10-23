@@ -11,10 +11,11 @@ document.addEventListener("DOMContentLoaded", function () {
     ctx.fillRect(0, 0, width, height);
 
     class Sprite {
-        constructor(postion, size, color) {
+        constructor({postion, size, color, velocity}) {
             this.postion = postion;
             this.size = size;
             this.color = color;
+            this.velocity = velocity;
         }
 
         draw() {
@@ -38,5 +39,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
          console.log(player);
+
+         function animate() {
+             ctx.clearRect(0, 0, width, height);
+             player.draw();
+             enemy.draw();
+             requestAnimationFrame(animate);
+             console.log("go");
+         }
+
+         animate();
 
 });

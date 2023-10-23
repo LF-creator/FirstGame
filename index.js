@@ -24,16 +24,51 @@ document.addEventListener("DOMContentLoaded", function () {
                  100, 200);
 
             }
+
+        update() {
+            this.draw();
+            this.postion.y += this.velocity.y;
+        }
+
     }
 
-    const player = new Sprite({ x: 50, y: 100 },
-         { width: 100, height: 100 }, "red");
+    const player = new Sprite({ 
+        postion: { 
+            x: 100, 
+            y: 100 
+        },
+         size: { 
+            width: 100, 
+            height: 100 
+        },
+          color: "red",
+
+          velocity: {
+             x: 2, 
+             y: 2 
+            }
+         });
 
     player.draw();
 
 
-    const enemy = new Sprite({ x: 900, y: 100 },
-         { width: 100, height: 100 }, "blue");
+    const enemy = new Sprite({ 
+        postion: { 
+        x: 700, 
+        y: 100 
+    },
+     size: { 
+        width: 100, 
+        height: 100 
+    },
+      color: "red",
+
+      velocity: {
+         x: 2, 
+         y: 2 
+        }
+     });
+
 
          enemy.draw();
 
@@ -41,11 +76,16 @@ document.addEventListener("DOMContentLoaded", function () {
          console.log(player);
 
          function animate() {
-             ctx.clearRect(0, 0, width, height);
+            ctx.fillStyle = "black";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
              player.draw();
-             enemy.draw();
+                enemy.draw();
+
              requestAnimationFrame(animate);
-             console.log("go");
+
+             player.update();
+                enemy.update();
          }
 
          animate();

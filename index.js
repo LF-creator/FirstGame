@@ -10,24 +10,48 @@ document.addEventListener("DOMContentLoaded", function () {
 
     ctx.fillRect(0, 0, width, height);
 
+    const gravity = 0.2;
+
     class Sprite {
         constructor({postion, size, color, velocity}) {
             this.postion = postion;
             this.size = size;
             this.color = color;
             this.velocity = velocity;
+            this.height = 150;
+
         }
 
         draw() {
-            ctx.fillStyle = "red";
-            ctx.fillRect(this.postion.x, this.postion.y,
-                 100, 200);
+            ctx.fillStyle = "white";
+            ctx.fillRect(
+                this.postion.x, 
+                this.postion.y,
+                100, 200
+                );
 
             }
 
         update() {
             this.draw();
+            this.postion.x += this.velocity.x;
             this.postion.y += this.velocity.y;
+
+            if (this.postion.y + this.height + this.velocity.y >= canvas.height ) {
+                this.velocity.y = 0;
+            } else {
+                this.velocity.y += gravity;
+
+
+            }
+
+            if (this.postion.x + this.velocity.x >= canvas.width) {
+                
+                this.velocity.x = 0;
+            } else if (this.postion.x + this.velocity.x <= 0) {
+                this.velocity.x = 0;
+            }
+
         }
 
     }
@@ -41,10 +65,10 @@ document.addEventListener("DOMContentLoaded", function () {
             width: 100, 
             height: 100 
         },
-          color: "red",
+          color: "white",
 
           velocity: {
-             x: 2, 
+             x: 0, 
              y: 2 
             }
          });
@@ -61,11 +85,11 @@ document.addEventListener("DOMContentLoaded", function () {
         width: 100, 
         height: 100 
     },
-      color: "red",
+      color: "blue",
 
       velocity: {
-         x: 2, 
-         y: 2 
+         x: 0, 
+         y: 2, 
         }
      });
 
@@ -90,4 +114,41 @@ document.addEventListener("DOMContentLoaded", function () {
 
          animate();
 
+
+         window.addEventListener("keydown", (event) => {
+            switch (event.key) {
+                case "d":
+                    player.velocity.x = 10;
+                    break;
+                case "a":
+                    player.velocity.x = -10;
+                    break;
+                case "w":
+                    player.velocity.y = -12;
+                    break;
+                case "s":
+                    player.velocity.y = +10;
+                    break;
+            }
+        });
+
+        window.addEventListener("keyup", (event) => {
+            switch (event.key) {
+                case "d":
+                    player.velocity.x = 0;
+                    break;
+                case "a":
+                    player.velocity.x = -0;
+                    break;
+                case "w":
+                    player.velocity.y = -0;
+                    break;
+                case "s":
+                    player.velocity.y = +0;
+                    break;
+            }
+        });
+
 });
+
+

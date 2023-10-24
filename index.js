@@ -132,17 +132,33 @@ document.addEventListener("DOMContentLoaded", function () {
                 player.velocity.x = 0;
 
                 if (keys.a.pressed && lastKey === "a") {
-                    player.velocity.x = -10;
+                    player.velocity.x = -5;
                 }
                 if (keys.d.pressed && lastKey === "d") {
-                    player.velocity.x = 10;
+                    player.velocity.x = 5;
                 }
                 if (keys.w.pressed && lastKey === "w") {
-                    player.velocity.y = -9;
+                    player.velocity.y = -5;
                 }
                 if (keys.s.pressed && lastKey === "s") {
-                    player.velocity.y = 20;
+                    player.velocity.y = 10;
                 }
+
+                enemy.velocity.x = 0;
+
+                if (keys.a.pressed && lastKey === "j") {
+                    enemy.velocity.x = -5;
+                }
+                if (keys.d.pressed && lastKey === "l") {
+                    enemy.velocity.x = 5;
+                }
+                if (keys.w.pressed && lastKey === "i") {
+                    enemy.velocity.y = -5;
+                }
+                if (keys.s.pressed && lastKey === "k") {
+                    enemy.velocity.y = 10;
+                }
+
          }
 
          animate();
@@ -167,6 +183,25 @@ document.addEventListener("DOMContentLoaded", function () {
                     lastKey = "s";
                     break;
 
+                case "l":
+                    keys.d.pressed = true;
+                    lastKey = "l";
+                    break;
+                case "j":
+                    keys.a.pressed = true;
+                    lastKey = "j";
+                    break;
+                case "i":
+                    keys.w.pressed = true;
+                    lastKey = "i";
+                    break;
+                case "k":
+                    keys.s.pressed = true;
+                    lastKey = "k";
+                    break;
+
+
+
             }
         });
 
@@ -184,6 +219,20 @@ document.addEventListener("DOMContentLoaded", function () {
                 case "s":
                     keys.s.pressed = false;
                     break;
+
+                case "l":
+                    keys.d.pressed = false;
+                    break;
+                case "j":
+                    keys.a.pressed = false;
+                    break;
+                case "i":
+                    keys.w.pressed = false;
+                    break;
+                case "k":
+                    keys.s.pressed = false;
+                    break;
+                    
             }
         });
 

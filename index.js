@@ -111,7 +111,21 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             s: {
                 pressed: false
+            },
+
+            i: {
+                pressed: false
+            },
+            j: {
+                pressed: false
+            },
+            k: {
+                pressed: false
+            },
+            l: {
+                pressed: false
             }
+
          }
 
             let lastKey = null;
@@ -146,16 +160,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 enemy.velocity.x = 0;
 
-                if (keys.a.pressed && lastKey === "j") {
+                if (keys.j.pressed && lastKey === "j") {
                     enemy.velocity.x = -5;
                 }
-                if (keys.d.pressed && lastKey === "l") {
+                if (keys.l.pressed && lastKey === "l") {
                     enemy.velocity.x = 5;
                 }
-                if (keys.w.pressed && lastKey === "i") {
+                if (keys.i.pressed && lastKey === "i") {
                     enemy.velocity.y = -5;
                 }
-                if (keys.s.pressed && lastKey === "k") {
+                if (keys.k.pressed && lastKey === "k") {
                     enemy.velocity.y = 10;
                 }
 
@@ -182,26 +196,27 @@ document.addEventListener("DOMContentLoaded", function () {
                     keys.s.pressed = true;
                     lastKey = "s";
                     break;
+            }
+        });
 
+        window.addEventListener("keydown", (event) => {
+            switch (event.key) {
                 case "l":
-                    keys.d.pressed = true;
+                    keys.l.pressed = true;
                     lastKey = "l";
                     break;
                 case "j":
-                    keys.a.pressed = true;
+                    keys.j.pressed = true;
                     lastKey = "j";
                     break;
                 case "i":
-                    keys.w.pressed = true;
+                    keys.i.pressed = true;
                     lastKey = "i";
                     break;
                 case "k":
-                    keys.s.pressed = true;
+                    keys.k.pressed = true;
                     lastKey = "k";
                     break;
-
-
-
             }
         });
 
@@ -219,23 +234,24 @@ document.addEventListener("DOMContentLoaded", function () {
                 case "s":
                     keys.s.pressed = false;
                     break;
+            }
+        });
 
+        window.addEventListener("keyup", (event) => {
+            switch (event.key) {
                 case "l":
-                    keys.d.pressed = false;
+                    keys.l.pressed = false;
                     break;
                 case "j":
-                    keys.a.pressed = false;
+                    keys.j.pressed = false;
                     break;
                 case "i":
-                    keys.w.pressed = false;
+                    keys.i.pressed = false;
                     break;
                 case "k":
-                    keys.s.pressed = false;
+                    keys.k.pressed = false;
                     break;
-                    
             }
         });
 
 });
-
-

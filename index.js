@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
             this.size = size;
             this.color = color;
             this.velocity = velocity;
-            this.height = 150;
+            this.height = 220;
 
         }
 
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
           velocity: {
              x: 0, 
-             y: 2 
+             y: 0 
             }
          });
 
@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       velocity: {
          x: 0, 
-         y: 2, 
+         y: 0, 
         }
      });
 
@@ -98,6 +98,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
          console.log(player);
+
+         const keys = {
+            a: {
+                pressed: false
+            },
+            d: {
+                pressed: false
+            },
+            w: {
+                pressed: false
+            },
+            s: {
+                pressed: false
+            }
+         }
 
          function animate() {
             ctx.fillStyle = "black";
@@ -110,6 +125,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
              player.update();
                 enemy.update();
+
+
+                player.velocity.x = 0;
+                if (keys.a.pressed) {
+                    player.velocity.x = -10;
+                }
+                if (keys.d.pressed) {
+                    player.velocity.x = 10;
+                }
+                if (keys.w.pressed) {
+                    player.velocity.y = -9;
+                }
+                if (keys.s.pressed) {
+                    player.velocity.y = 20;
+                }
          }
 
          animate();
@@ -118,33 +148,34 @@ document.addEventListener("DOMContentLoaded", function () {
          window.addEventListener("keydown", (event) => {
             switch (event.key) {
                 case "d":
-                    player.velocity.x = 10;
+                    keys.d.pressed = true;
                     break;
                 case "a":
-                    player.velocity.x = -10;
+                    keys.a.pressed = true;
                     break;
                 case "w":
-                    player.velocity.y = -12;
+                    keys.w.pressed = true;
                     break;
                 case "s":
-                    player.velocity.y = +10;
+                    keys.s.pressed = true;
                     break;
+
             }
         });
 
         window.addEventListener("keyup", (event) => {
             switch (event.key) {
                 case "d":
-                    player.velocity.x = 0;
+                    keys.d.pressed = false;
                     break;
                 case "a":
-                    player.velocity.x = -0;
+                    keys.a.pressed = false;
                     break;
                 case "w":
-                    player.velocity.y = -0;
+                    keys.w.pressed = false;
                     break;
                 case "s":
-                    player.velocity.y = +0;
+                    keys.s.pressed = false;
                     break;
             }
         });

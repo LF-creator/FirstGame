@@ -114,6 +114,8 @@ document.addEventListener("DOMContentLoaded", function () {
             }
          }
 
+            let lastKey = null;
+
          function animate() {
             ctx.fillStyle = "black";
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -128,16 +130,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 player.velocity.x = 0;
-                if (keys.a.pressed) {
+
+                if (keys.a.pressed && lastKey === "a") {
                     player.velocity.x = -10;
                 }
-                if (keys.d.pressed) {
+                if (keys.d.pressed && lastKey === "d") {
                     player.velocity.x = 10;
                 }
-                if (keys.w.pressed) {
+                if (keys.w.pressed && lastKey === "w") {
                     player.velocity.y = -9;
                 }
-                if (keys.s.pressed) {
+                if (keys.s.pressed && lastKey === "s") {
                     player.velocity.y = 20;
                 }
          }
@@ -149,15 +152,19 @@ document.addEventListener("DOMContentLoaded", function () {
             switch (event.key) {
                 case "d":
                     keys.d.pressed = true;
+                    lastKey = "d";
                     break;
                 case "a":
                     keys.a.pressed = true;
+                    lastKey = "a";
                     break;
                 case "w":
                     keys.w.pressed = true;
+                    lastKey = "w";
                     break;
                 case "s":
                     keys.s.pressed = true;
+                    lastKey = "s";
                     break;
 
             }

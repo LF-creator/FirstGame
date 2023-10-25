@@ -99,77 +99,68 @@ document.addEventListener("DOMContentLoaded", function () {
 
          console.log(player);
 
-         const keys = {
-            a: {
-                pressed: false
-            },
-            d: {
-                pressed: false
-            },
-            w: {
-                pressed: false
-            },
-            s: {
-                pressed: false
-            },
+         let playerKeys = {
+            a: false,
+            d: false,
+            w: false,
+            s: false,
+          };
 
-            i: {
-                pressed: false
-            },
-            j: {
-                pressed: false
-            },
-            k: {
-                pressed: false
-            },
-            l: {
-                pressed: false
-            }
+          let enemyKeys = {
+            i: false,
+            j: false,
+            k: false,
+            l: false,
+          };
 
-         }
+            
 
-            let lastKey = null;
+            let lastPlayerKey = null;
+            let lastEnemyKey = null;
 
          function animate() {
             ctx.fillStyle = "black";
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-             player.draw();
+                player.draw();
                 enemy.draw();
 
              requestAnimationFrame(animate);
 
-             player.update();
+            
+                player.update();
                 enemy.update();
+            
 
 
                 player.velocity.x = 0;
+                enemy.velocity.x = 0;
 
-                if (keys.a.pressed && lastKey === "a") {
+                if (playerKeys.a) {
                     player.velocity.x = -5;
                 }
-                if (keys.d.pressed && lastKey === "d") {
+                if (playerKeys.d) {
                     player.velocity.x = 5;
                 }
-                if (keys.w.pressed && lastKey === "w") {
+                if (playerKeys.w) {
                     player.velocity.y = -5;
                 }
-                if (keys.s.pressed && lastKey === "s") {
+                if (playerKeys.s) {
                     player.velocity.y = 10;
                 }
 
-                enemy.velocity.x = 0;
+                
 
-                if (keys.j.pressed && lastKey === "j") {
+                if (enemyKeys.j) {
                     enemy.velocity.x = -5;
                 }
-                if (keys.l.pressed && lastKey === "l") {
+                if (enemyKeys.l) {
                     enemy.velocity.x = 5;
                 }
-                if (keys.i.pressed && lastKey === "i") {
+                if (enemyKeys.i) {
                     enemy.velocity.y = -5;
                 }
-                if (keys.k.pressed && lastKey === "k") {
+                if (enemyKeys.k) {
                     enemy.velocity.y = 10;
                 }
 
@@ -179,79 +170,65 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
          window.addEventListener("keydown", (event) => {
+            // Player's keys
             switch (event.key) {
-                case "d":
-                    keys.d.pressed = true;
-                    lastKey = "d";
-                    break;
-                case "a":
-                    keys.a.pressed = true;
-                    lastKey = "a";
-                    break;
-                case "w":
-                    keys.w.pressed = true;
-                    lastKey = "w";
-                    break;
-                case "s":
-                    keys.s.pressed = true;
-                    lastKey = "s";
-                    break;
+              case "a":
+                playerKeys.a = true;
+                break;
+              case "d":
+                playerKeys.d = true;
+                break;
+              case "w":
+                playerKeys.w = true;
+                break;
+              case "s":
+                playerKeys.s = true;
+                break;
+              // Enemy's keys
+              case "j":
+                enemyKeys.j = true;
+                break;
+              case "l":
+                enemyKeys.l = true;
+                break;
+              case "i":
+                enemyKeys.i = true;
+                break;
+              case "k":
+                enemyKeys.k = true;
+                break;
             }
-        });
-
-        window.addEventListener("keydown", (event) => {
+          });
+        
+          window.addEventListener("keyup", (event) => {
+            // Player's keys
             switch (event.key) {
-                case "l":
-                    keys.l.pressed = true;
-                    lastKey = "l";
-                    break;
-                case "j":
-                    keys.j.pressed = true;
-                    lastKey = "j";
-                    break;
-                case "i":
-                    keys.i.pressed = true;
-                    lastKey = "i";
-                    break;
-                case "k":
-                    keys.k.pressed = true;
-                    lastKey = "k";
-                    break;
+              case "a":
+                playerKeys.a = false;
+                break;
+              case "d":
+                playerKeys.d = false;
+                break;
+              case "w":
+                playerKeys.w = false;
+                break;
+              case "s":
+                playerKeys.s = false;
+                break;
+              // Enemy's keys
+              case "j":
+                enemyKeys.j = false;
+                break;
+              case "l":
+                enemyKeys.l = false;
+                break;
+              case "i":
+                enemyKeys.i = false;
+                break;
+              case "k":
+                enemyKeys.k = false;
+                break;
             }
-        });
-
-        window.addEventListener("keyup", (event) => {
-            switch (event.key) {
-                case "d":
-                    keys.d.pressed = false;
-                    break;
-                case "a":
-                    keys.a.pressed = false;
-                    break;
-                case "w":
-                    keys.w.pressed = false;
-                    break;
-                case "s":
-                    keys.s.pressed = false;
-                    break;
-            }
-        });
-
-        window.addEventListener("keyup", (event) => {
-            switch (event.key) {
-                case "l":
-                    keys.l.pressed = false;
-                    break;
-                case "j":
-                    keys.j.pressed = false;
-                    break;
-                case "i":
-                    keys.i.pressed = false;
-                    break;
-                case "k":
-                    keys.k.pressed = false;
-                    break;
-            }
-        });
+          });
 
 });

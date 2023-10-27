@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   ctx.fillRect(0, 0, width, height);
 
-  const gravity = 0.2;
+  const gravity = 0.5;
   
 
   class Sprite {
@@ -21,11 +21,20 @@ document.addEventListener("DOMContentLoaded", () => {
       this.color = color;
       this.velocity = velocity;
       this.height = 220;
+      this.attackBox = {
+        postion: this.postion,
+        width: 200,
+        height: 50,
+      };
+
+      this.color = color;
     }
 
     draw() {
-      ctx.fillStyle = "white";
+      ctx.fillStyle = this.color;
       ctx.fillRect(this.postion.x, this.postion.y, 100, 200);
+
+      ctx.fillRect(this.attackBox.postion.x, this.attackBox.postion.y, this.attackBox.width, this.attackBox.height);
     }
 
     update() {
@@ -50,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const player = new Sprite({
     postion: { x: 100, y: 100 },
     size: { width: 100, height: 100 },
-    color: "blue",
+    color: "white",
     velocity: { x: 0, y: 0 },
   });
 
@@ -121,6 +130,86 @@ document.addEventListener("DOMContentLoaded", () => {
     if (enemyKeys.k) {
       enemy.velocity.y = 10;
     }
+
+    // Collision detection
+
+    // Player's attack
+
+    if (
+      player.attackBox.postion.x + player.attackBox.width >= enemy.postion.x &&
+      player.attackBox.postion.x <= enemy.postion.x + enemy.size.width &&
+      player.attackBox.postion.y + player.attackBox.height >= enemy.postion.y &&
+      player.attackBox.postion.y <= enemy.postion.y + enemy.size.height
+    ) {
+      console.log("hit");
+    }
+
+    // Enemy's attack
+
+    if (
+      enemy.attackBox.postion.x + enemy.attackBox.width >= player.postion.x &&
+      enemy.attackBox.postion.x <= player.postion.x + player.size.width &&
+      enemy.attackBox.postion.y + enemy.attackBox.height >= player.postion.y &&
+      enemy.attackBox.postion.y <= player.postion.y + player.size.height
+    ) {
+      console.log("hit");
+    }
+
+    // Player's attack box
+
+    if (playerKeys.a) {
+      player.attackBox.postion.x = player.postion.x - player.attackBox.width;
+      player.attackBox.postion.y = player.postion.y;
+    } else if (playerKeys.d) {
+      player.attackBox.postion.x = player.postion.x + player.size.width;
+      player.attackBox.postion.y = player.postion.y;
+    } else if (playerKeys.w) {
+      player.attackBox.postion.x = player.postion.x;
+      player.attackBox.postion.y = player.postion.y - player.attackBox.height;
+    } else if (playerKeys.s) {
+      player.attackBox.postion.x = player.postion.x;
+      player.attackBox.postion.y = player.postion.y + player.size.height;
+    }
+
+    // Enemy's attack box
+
+    if (enemyKeys.j) {
+      enemy.attackBox.postion.x = enemy.postion.x - enemy.attackBox.width;
+      enemy.attackBox.postion.y = enemy.postion.y;
+    } else if (enemyKeys.l) {
+      enemy.attackBox.postion.x = enemy.postion.x + enemy.size.width;
+      enemy.attackBox.postion.y = enemy.postion.y;
+    } else if (enemyKeys.i) {
+      enemy.attackBox.postion.x = enemy.postion.x;
+      enemy.attackBox.postion.y = enemy.postion.y - enemy.attackBox.height;
+    } else if (enemyKeys.k) {
+      enemy.attackBox.postion.x = enemy.postion.x;
+      enemy.attackBox.postion.y = enemy.postion.y + enemy.size.height;
+    } else {
+      enemy.attackBox.postion.x = enemy.postion.x;
+      enemy.attackBox.postion.y = enemy.postion.y;
+    }
+
+    // Player's attack box
+
+    if (playerKeys.a) {
+      player.attackBox.postion.x = player.postion.x - player.attackBox.width;
+      player.attackBox.postion.y = player.postion.y;
+    } else if (playerKeys.d) {
+      player.attackBox.postion.x = player.postion.x + player.size.width;
+      player.attackBox.postion.y = player.postion.y;
+    } else if (playerKeys.w) {
+      player.attackBox.postion.x = player.postion.x;
+      player.attackBox.postion.y = player.postion.y - player.attackBox.height;
+    } else if (playerKeys.s) {
+      player.attackBox.postion.x = player.postion.x;
+      player.attackBox.postion.y = player.postion.y + player.size.height;
+    } else {  
+      player.attackBox.postion.x = player.postion.x;
+      player.attackBox.postion.y = player.postion.y;
+    }
+
+    
   }
 
   animate();

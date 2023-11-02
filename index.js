@@ -55,6 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   }
+  
 
   const player = new Sprite({
     postion: { x: 100, y: 100 },
